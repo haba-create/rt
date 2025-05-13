@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RQ | Contemporary Fashion & Art</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --gold: #f39c12;
+            --teal: #16a085;
+            --light: #ecf0f1;
+            --dark: #1a1a1a;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            color: var(--primary);
+            line-height: 1.6;
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .abstract-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.03;
+            background: 
+                linear-gradient(135deg, transparent 25%, var(--accent) 25%),
+                linear-gradient(225deg, transparent 25%, var(--gold) 25%),
+                linear-gradient(45deg, transparent 25%, var(--teal) 25%),
+                linear-gradient(315deg, transparent 25%, var(--primary) 25%);
+            background-size: 400px 400px;
+            background-position: 0 0, 200px 0, 200px 200px, 0 200px;
+            animation: drift 60s linear infinite;
+        }
+        
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(200px, 200px); }
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(44, 62, 80, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+        
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo svg {
+            width: 45px;
+            height: 45px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover svg {
+            transform: rotate(90deg);
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+        
+        nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        main {
+            margin-top: 70px;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #fff 50%, var(--light) 50%);
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-size: 4rem;
+            font-weight: 200;
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .accent-text {
+            color: var(--accent);
+            font-weight: 400;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            font-weight: 300;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+        
+        .abstract-shape {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            opacity: 0.1;
+        }
+        
+        .shape1 {
+            top: 10%;
+            right: 10%;
+            background: var(--accent);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: float1 20s ease-in-out infinite;
+        }
+        
+        .shape2 {
+            bottom: 10%;
+            left: 10%;
+            background: var(--teal);
+            border-radius: 50%;
+            animation: float2 25s ease-in-out infinite;
+        }
+        
+        .shape3 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--gold);
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+        
+        @keyframes float2 {
+            0%, 100% { transform: translateX(0) scale(1); }
+            50% { transform: translateX(30px) scale(1.1); }
+        }
+        
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        section {
+            padding: 100px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        h3 {
+            font-size: 3rem;
+            font-weight: 200;
+            letter-spacing: -1px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 300;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            height: 400px;
+            background: var(--light);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .gallery-item:nth-child(odd) {
+            transform: translateY(50px);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.8s;
+        }
+        
+        .gallery-item:hover::before {
+            left: 100%;
+        }
+        
+        .gallery-item-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            opacity: 0.9;
+            transition: opacity 0.5s;
+        }
+        
+        .gallery-item:nth-child(2n) .gallery-item-bg {
+            background: linear-gradient(135deg, var(--teal), var(--gold));
+        }
+        
+        .gallery-item:nth-child(3n) .gallery-item-bg {
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+        }
+        
+        .gallery-item:hover .gallery-item-bg {
+            opacity: 0.95;
+        }
+        
+        .gallery-item-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px;
+            color: white;
+            transform: translateY(100px);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-item:hover .gallery-item-content {
+            transform: translateY(0);
+        }
+        
+        .gallery-item h4 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .gallery-item p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .about {
+            background: linear-gradient(135deg, #fff 70%, var(--light) 30%);
+            padding: 120px 40px;
+            position: relative;
+        }
+        
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about p {
+            font-size: 1.15rem;
+            color: #666;
+            margin-bottom: 30px;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+        
+        .contact {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 100px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact h3 {
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-item {
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .contact-item strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery-item:nth-child(odd) {
+                transform: translateY(0);
+            }
+            
+            h3 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="abstract-bg"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <g fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="50" cy="50" r="30" stroke="#e74c3c"/>
+                        <rect x="35" y="35" width="30" height="30" transform="rotate(45 50 50)" stroke="#16a085"/>
+                        <polygon points="50,20 80,50 50,80 20,50" stroke="#f39c12"/>
+                    </g>
+                </svg>
+                <h1>RQ</h1>
+            </div>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#fashion">FASHION</a></li>
+                <li><a href="#art">ART</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="home" class="hero">
+            <div class="abstract-shape shape1"></div>
+            <div class="abstract-shape shape2"></div>
+            <div class="abstract-shape shape3"></div>
+            <div class="hero-content">
+                <h2>RQ <span class="accent-text">Pakistani Designer</span></h2>
+                <p>Where tradition meets contemporary expression</p>
+                <p>Fashion & Art by Rubab</p>
+                <a href="#fashion" class="btn">EXPLORE</a>
+            </div>
+        </section>
+        
+        <section id="fashion">
+            <div class="section-header">
+                <h3>Fashion</h3>
+                <p>Contemporary designs rooted in Pakistani heritage</p>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Bridal Couture</h4>
+                        <p>Timeless elegance redefined</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Evening Wear</h4>
+                        <p>Sophisticated contemporary pieces</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Ready to Wear</h4>
+                        <p>Modern everyday luxury</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Heritage Collection</h4>
+                        <p>Reimagined traditional crafts</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Fusion Line</h4>
+                        <p>East meets West</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Accessories</h4>
+                        <p>Curated finishing touches</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="art">
+            <div class="section-header">
+                <h3>Art</h3>
+                <p>Visual narratives through contemporary lens</p>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Abstract Series</h4>
+                        <p>Emotional landscapes</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Cultural Motifs</h4>
+                        <p>Heritage reimagined</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Urban Stories</h4>
+                        <p>City life narratives</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Minimalist Works</h4>
+                        <p>Less is more</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Texture Studies</h4>
+                        <p>Tactile expressions</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-bg"></div>
+                    <div class="gallery-item-content">
+                        <h4>Mixed Media</h4>
+                        <p>Boundary-pushing art</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about" class="about">
+            <div class="about-content">
+                <h3>About</h3>
+                <p>Rubab is a contemporary Pakistani designer and artist who seamlessly blends traditional craftsmanship with modern aesthetics. Her work explores the intersection of heritage and innovation, creating pieces that speak to both history and the future.</p>
+                <p>With a background in both fashion design and fine arts, Rubab's collections are characterized by their thoughtful approach to form, texture, and cultural narrative. Each piece tells a story of evolution and identity.</p>
+                <p>Her artistic practice extends beyond fashion into visual arts, where she continues to explore themes of cultural identity, abstraction, and the modern Pakistani experience.</p>
+            </div>
+        </section>
+        
+        <section id="contact" class="contact">
+            <h3>Connect</h3>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <strong>EMAIL</strong>
+                    info@rqdesigner.com
+                </div>
+                <div class="contact-item">
+                    <strong>PHONE</strong>
+                    +92 XXX XXXXXXX
+                </div>
+                <div class="contact-item">
+                    <strong>STUDIO</strong>
+                    Karachi, Pakistan
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 RQ Pakistani Designer. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Add header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
